@@ -26,11 +26,17 @@ function parse_and_run(o,live_mode_is_on){
     }*/
   }
   const shadow_prompt=(the_prompt)=>{
-    o.outputs.push({kind:'prompt',v:`"${the_prompt}": 'In live mode, calls to prompt() return the string "true"'`})
+    o.outputs.push({
+      kind:'prompt',
+      v:`In Live mode, prompt("${the_prompt}"), returns "true"`
+    })
     return 'true'
   }
   const shadow_confirm=(the_question)=>{
-    o.outputs.push({kind:'confirm',v:`"${the_question}": 'In live mode, calls to confirm() return the boolean true'`})
+    o.outputs.push({
+      kind:'confirm',
+      v:`In Live mode, confirm("${the_question}"), returns true`
+    })
     return true
   }
   const shadow_alert=live_mode_is_on
@@ -42,8 +48,8 @@ function parse_and_run(o,live_mode_is_on){
       shadow_console,
       live_mode_is_on?shadow_prompt:prompt,
       live_mode_is_on?shadow_confirm:confirm
-      )
-      o.outputs.push({kind:'rv',v:make_string_ish(o.rv)})
+    )
+    o.outputs.push({kind:'rv',v:make_string_ish(o.rv)})
   }
   catch (e){ 
     console.error(e)
