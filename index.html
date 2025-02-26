@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8>
+<link href=c.css rel=stylesheet media=screen />
+<link rel=icon href="data:;base64,iVBORw0KGgo=">
+<title>Koad &mdash; Live JS Code Runner / Playground</title>
+</head><body>
+  <div popover id=popover_license>
+    <p>By and Copyright &copy; 2023-2025 <a href=https://gregabbott.pages.dev/>Greg Abbott</a>.<br>
+      All rights reserved.<br>
+      (Site, tool, documentation etc.)</p>
+    <p>NO WARRANTY<br>
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    </p>
+  </div>
+  <header>
+  <nav class=no_select>
+    <div class=menu_bar>
+      <input name=m_bar id=close_sub_menu checked type=radio>
+      <label for=close_sub_menu hidden></label>
+      <div class=menu_item>
+        <input hidden id=mm_about name=m_bar type=radio>
+        <label class=menu_button for=mm_about>Koad
+        </label>
+        <fieldset role=presentation class=sub_menu_holder>
+          <button class=sub_menu_button popovertarget=popover_license>License</button>
+          <a class=sub_menu_button href=changelog.html>Change Log</a>
+          <span>Version 2025_0226</span>
+        </fieldset><!-- drop down menu-->
+      </div><!-- menu item-->
+      <div class=menu_item>
+        <input  id=mm_edit hidden name=m_bar type=radio>
+        <label for=mm_edit class=menu_button>Edit</label>
+        <fieldset role=presentation class=sub_menu_holder>
+          <div class=sub_menu_button id=copy_input>Copy JavaScript</div>
+          <div class=sub_menu_button id=copy_output>Copy Result</div>
+          <div class=sub_menu_button id=reset_fields_and_clear_local_storage>Reset</div>
+        </fieldset>
+      </div><!-- end edit menu -->
+      <div class=menu_item id=save_menu_item>
+        <input hidden id=mm_save name=m_bar type=radio>
+        <label class=menu_button for=mm_save>Save</label>
+        <fieldset role=presentation class=sub_menu_holder>
+          <div class=sub_menu_button id=save_input>Save Input.js <!--<span id=input_weight></span>--></div>
+          <div class=sub_menu_button id=save_output>Save Output.js <!--<span id=output_weight></span>--></div>
+        </fieldset>
+      </div><!-- end Save menu-->
+      <div class=menu_item>
+      <input  hidden id=live type=checkbox checked>
+      <label  for=live class=menu_button>Live</label>
+      </div> 
+      <div id=run class=menu_button
+title="To see code output:
+Click Run ('CMD+Enter' / 'CTRL+Enter' when input has focus)
+OR enable Live mode">Run</div>
+    </div><!--menu bar-->
+  </nav>
+</header>
+<div id=cols>
+<div id=left class=no_select>
+  <div class=textarea_holder>
+  <textarea id=input placeholder="Write JavaScript here and return a value to see it in the output area"></textarea>
+  </div>
+</div><!--end left-->
+<div id=column_sizer title="Double click to reset to middle"><span></span></div>
+<div id=right class=no_select>
+  <div id=output ></div>
+</div>
+</div>
+</div><!-- end right-->
+</div><!-- end cols-->
+<noscript>
+  <div id=please_enable_js>
+    This page requires JavaScript.
+  </div>
+</noscript>
+<div id=hide_popover></div>
+<footer>
+  <div><button popovertarget=popover_license>By + &copy; </button> <a href=https://gregabbott.pages.dev/>Greg Abbott</a> 2023-2025 | <a href=https://buymeacoffee.com/gregabbott>Buy Me A Coffee</a> | 
+  <a href=https://ko-fi.com/gregabbott>KoFi</a></div>
+</footer>
+</body>
+<script src=j.js></script>
+</html>
