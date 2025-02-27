@@ -1,4 +1,4 @@
-# Koad (Rhymes with toad)
+# Koad
 A simple JavaScript code runner, playground and scratchpad. Written from scratch in Vanilla JS. ~22KB.
 
 - Use the tool at [the main site](https://koad.pages.dev/) (and [GitHub Pages](https://gregabbott.github.io/koad/)).
