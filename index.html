@@ -32,7 +32,8 @@
         <fieldset role=presentation class=sub_menu_holder>
           <div class=sub_menu_button id=copy_input>Copy JavaScript</div>
           <div class=sub_menu_button id=copy_output>Copy Result</div>
-          <div class=sub_menu_button id=reset_fields_and_clear_local_storage>Reset</div>
+          <div class=sub_menu_button id=clear_all>Clear all</div>
+          <div class=sub_menu_button id=load_demo>Load demo</div>
         </fieldset>
       </div><!-- end edit menu -->
       <div class=menu_item id=save_menu_item>
@@ -58,6 +59,9 @@ OR enable Live mode">Run</div>
 <div id=left class=no_select>
   <div class=textarea_holder>
   <textarea id=input placeholder="Write JavaScript here and return a value to see it in the output area"></textarea>
+  </div> <div id=undo_redo>
+    <button id=undo class=disabled title=UNDO>&lt;</button>
+    <button id=redo class=disabled title=REDO>&gt;</button>
   </div>
 </div><!--end left-->
 <div id=column_sizer title="Double click to reset to middle"><span></span></div>
@@ -74,9 +78,11 @@ OR enable Live mode">Run</div>
 </noscript>
 <div id=hide_popover></div>
 <footer>
+ 
   <div><button popovertarget=popover_license>By + &copy; </button> <a href=https://gregabbott.pages.dev/>Greg Abbott</a> 2023-2025 | <a href=https://buymeacoffee.com/gregabbott>Buy Me A Coffee</a> | 
   <a href=https://ko-fi.com/gregabbott>KoFi</a></div>
 </footer>
 </body>
+<script src=text_editor.js></script>
 <script src=j.js></script>
 </html>

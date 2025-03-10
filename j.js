@@ -1,5 +1,6 @@
 //By + Copyright Greg Abbott 2023-2025. 
-//V1 2023_0204 V 2025_0226
+//V1 2023_0204 V 2025_0310
+var gl0={}//global
 function make_string_ish(x){
   return x===globalThis?'globalThis'// if(x===window)same result
  :typeof x ==='function'?String(x)// for viewing in output area
@@ -65,13 +66,29 @@ const get_by_id=id=>document.getElementById(id)
 const ids=[
 `input`,`copy_input`,`save_input`,
 `output`,`copy_output`,`save_output`,
-`reset_fields_and_clear_local_storage`,
+`clear_all`,`load_demo`,
 `live`,
 `run`,
-`left`,`right`,`column_sizer`
+`left`,`right`,`column_sizer`,`undo`,`redo`
 ]
 ids.forEach(id=>el[id]=get_by_id(id))
+const input_fns = setup_text_editor(el.input,el.undo,el.redo)//external script
+//input_fns also returns set_value() undo_stack[] redo_stack[]
+
+el.undo.onclick=()=>{
+  input_fns.undo()
+}
+el.redo.onclick=()=>{
+  input_fns.redo()
+}
 let db={input:``,live:``}//LET as lazy Local storage override
+function select_text(element) {/*ignore pseudo :before element*/
+  let range = document.createRange()
+  range.selectNodeContents(element)
+  let selection = window.getSelection()
+  selection.removeAllRanges()
+  selection.addRange(range)
+}
 const go=()=>{
   //console.clear()//clear messages from previous run
   const o= parse_and_run({fn:el.input.value},el.live.checked)
@@ -87,6 +104,7 @@ const go=()=>{
     const div = document.createElement('div')
     div.textContent = v+'\n\n'
     div.classList.add(`ok_${kind}`)//o.k == output kind
+    div.onclick=()=>select_text(div)
     fragment.appendChild(div)
   })
   el.output.innerHTML = ''//Clear previous output
@@ -103,16 +121,16 @@ const copy=({clicked,str})=>{
 }
 const demo_input = 
 `// A simple JavaScript code runner, playground and scratchpad.
-// Project <24KB. Written in vanilla JS.
+// Project <28KB. Written in vanilla JS.
 alert(
   [
     {
       mode: 'Live',
-      alert_outputs_to: 'Output area'
+      alert_outputs_to: 'Output area',
     },
     { 
       mode: 'Normal',
-      alert_outputs_to: 'Alert dialog'
+      alert_outputs_to: 'Alert dialog',
     }
   ]
 )
@@ -134,13 +152,13 @@ el.column_sizer.addEventListener('dblclick', () => {
   el.left.style.width = '50%'
   el.right.style.width = '50%'
 })
-el.column_sizer.addEventListener('mousedown',e=>{
-  document.addEventListener('mousemove', resize_columns)
+el.column_sizer.addEventListener('pointerdown',e=>{
+  document.addEventListener('pointermove', resize_columns)
   function mouse_up_fn(){
-    document.removeEventListener('mousemove',resize_columns)
+    document.removeEventListener('pointermove',resize_columns)
     el.input.focus()
   }
-  document.addEventListener('mouseup', mouse_up_fn,{once:true})
+  document.addEventListener('pointerup', mouse_up_fn,{once:true})
 })
 function resize_columns(event) {
   const container_rect = el.column_sizer.parentElement
@@ -161,10 +179,13 @@ on('click',e=>{
   el.input.focus()
 })(el.copy_output)
 on('click',e=>{
-  el.input.value=demo_input
-  el.live.checked=true//Reset to default
-  clear_local_storage()
-})(el.reset_fields_and_clear_local_storage)
+  input_fns.set_value('')//stores history state
+  el.input.focus()
+})(el.clear_all)
+on('click',e=>{
+  input_fns.set_value(demo_input)//stores history state
+  el.input.focus()
+})(el.load_demo)
 const live_or_not=()=>{
 	if(el.live.checked){
 		el.input.addEventListener('keyup',go)
@@ -214,7 +235,6 @@ window.addEventListener("beforeunload", e => {
 })
 function clear_local_storage (){
   localStorage.removeItem(local_storage_name)
-  window.location.reload()
 }
 function get_stamp(d = new Date()) {
   const p=n=>String(n).padStart(2,'0')
@@ -282,5 +302,4 @@ cmd_enter({
     setTimeout(()=>el.run.click(),1)//prevent this firing first
   }
 })
-//handle_indent_commands_loses_undo_stack(el.input)
 })()
