@@ -172,11 +172,11 @@ on('click',e=>{
 })(el.copy_output)
 on('click',e=>{
   input_fns.set_value('')//stores history state
-  el.input.focus()
+  go()
 })(el.clear_all)
 on('click',e=>{
   input_fns.set_value(demo_input)//stores history state
-  el.input.focus()
+  go()
 })(el.load_demo)
 const live_or_not=()=>{
 	if(el.live.checked){
