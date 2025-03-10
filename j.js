@@ -122,22 +122,13 @@ const copy=({clicked,str})=>{
 const demo_input = 
 `// A simple JavaScript code runner, playground and scratchpad.
 // Project <28KB. Written in vanilla JS.
-alert(
-  [
-    {
-      mode: 'Live',
-      alert_outputs_to: 'Output area',
-    },
-    { 
-      mode: 'Normal',
-      alert_outputs_to: 'Alert dialog',
-    }
-  ]
-)
-// Disable Live mode to use confirm() and prompt() normally.
-// (In Live mode, these return true and "true" automatically)
-// 
-// Optional output methods
+
+alert('In Live Mode, alerts appear in the output area instead.')
+
+// Disable Live Mode to use confirm() and prompt() normally.
+// (In Live mode, these return true and "true" automatically.)
+
+// Output methods include console.log and return:
 console.log(
   {a:1,b:2},
   x=>x+1,
@@ -147,6 +138,7 @@ console.log(
   1,
   'Hello'
 )
+
 return 'Return Value'`
 el.column_sizer.addEventListener('dblclick', () => {
   el.left.style.width = '50%'
